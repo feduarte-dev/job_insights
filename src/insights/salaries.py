@@ -27,9 +27,25 @@ class ProcessSalaries(ProcessJobs):
             return lowest_salary
 
     def matches_salary_range(self, job: Dict, salary: Union[int, str]) -> bool:
-        pass
+        try:
+            min_salary = int(job["min_salary"])
+            max_salary = int(job["max_salary"])
+
+            if min_salary > max_salary:
+                raise ValueError
+
+            return min_salary <= int(salary) <= max_salary
+        except (TypeError, KeyError):
+            raise ValueError
 
     def filter_by_salary_range(
         self, jobs: List[dict], salary: Union[str, int]
     ) -> List[Dict]:
         pass
+
+
+# teste = ProcessSalaries()
+# teste.read("data/jobs.csv")
+# print(teste.matches_salary_range({"max_salary": 10000, "min_salary": 0}, -1))
+
+# para funcionar minhas variaveis preciso corrigir o import

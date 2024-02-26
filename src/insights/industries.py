@@ -11,10 +11,3 @@ class ProcessIndustries(ProcessJobs):
             row["industry"] for row in self.jobs_list if row["industry"] != ""
         )
         return list(unique_industries)
-
-
-# teste = ProcessIndustries()
-# teste.read("data/jobs.csv")
-# print(teste.get_unique_industries())
-
-# para funcionar minhas variaveis preciso corrigir o import
