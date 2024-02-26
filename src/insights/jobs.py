@@ -8,9 +8,7 @@ class ProcessJobs:
 
     def read(self, file) -> List[Dict]:
         with open(file) as jobs_file:
-            jobs_reader = csv.DictReader(jobs_file)
-            for row in jobs_reader:
-                self.jobs_list.append(dict(row))
+            self.jobs_list = [dict(row) for row in csv.DictReader(jobs_file)]
         return self.jobs_list
 
     def get_unique_job_types(self) -> List[str]:
@@ -19,13 +17,11 @@ class ProcessJobs:
 
     def filter_by_multiple_criteria(self, jobs, filters) -> List[dict]:
         if not isinstance(filters, dict):
-            raise TypeError
+            raise TypeError("Filters must be a dictionary")
 
-        filtered_jobs = []
-        for row in jobs:
-            if (
-                filters["industry"] == row["industry"]
-                and filters["job_type"] == row["job_type"]
-            ):
-                filtered_jobs.append(row)
+        filtered_jobs = [
+            row
+            for row in jobs
+            if all(row.get(key) == value for key, value in filters.items())
+        ]
         return filtered_jobs

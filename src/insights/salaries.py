@@ -12,9 +12,7 @@ class ProcessSalaries(ProcessJobs):
             for row in self.jobs_list
             if row["max_salary"].isnumeric()
         ]
-        if valid_salaries:
-            highest_salary = max(valid_salaries)
-            return highest_salary
+        return max(valid_salaries)
 
     def get_min_salary(self) -> int:
         valid_salaries = [
@@ -22,19 +20,16 @@ class ProcessSalaries(ProcessJobs):
             for row in self.jobs_list
             if row["min_salary"].isnumeric()
         ]
-        if valid_salaries:
-            lowest_salary = min(valid_salaries)
-            return lowest_salary
+        return min(valid_salaries)
 
     def matches_salary_range(self, job: Dict, salary: Union[int, str]) -> bool:
         try:
-            min_salary = int(job["min_salary"])
-            max_salary = int(job["max_salary"])
-
-            if min_salary > max_salary:
+            if int(job["min_salary"]) > int(job["max_salary"]):
                 raise ValueError
 
-            return min_salary <= int(salary) <= max_salary
+            return (
+                int(job["min_salary"]) <= int(salary) <= int(job["max_salary"])
+            )
         except (TypeError, KeyError):
             raise ValueError
 
