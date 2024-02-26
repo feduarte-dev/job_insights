@@ -7,7 +7,16 @@ class ProcessSalaries(ProcessJobs):
         super().__init__()
 
     def get_max_salary(self) -> int:
-        pass
+        highest_salary = 0
+        for row in self.jobs_list:
+            if (
+                row["max_salary"] != ""
+                and row["max_salary"] != "invalid"
+                and int(row["max_salary"]) > highest_salary
+            ):
+
+                highest_salary = int(row["max_salary"])
+        return highest_salary
 
     def get_min_salary(self) -> int:
         pass
