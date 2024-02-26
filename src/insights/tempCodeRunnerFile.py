@@ -1,1 +1,0 @@
-row["max_salary"]
