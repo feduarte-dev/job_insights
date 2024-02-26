@@ -35,7 +35,7 @@ class ProcessSalaries(ProcessJobs):
                 raise ValueError
 
             return min_salary <= int(salary) <= max_salary
-        except (TypeError, KeyError):  # isso é gambiarra?
+        except (TypeError, KeyError):
             raise ValueError
 
     def filter_by_salary_range(
@@ -44,15 +44,8 @@ class ProcessSalaries(ProcessJobs):
         filtered_list = []
         for row in jobs:
             try:
-                if self.matches_salary_range(row, int(salary)):
+                if self.matches_salary_range(row, salary):
                     filtered_list.append(row)
-            finally:
+            except ValueError:
                 continue
         return filtered_list
-
-
-# teste = ProcessSalaries()
-# teste.read("data/jobs.csv")
-# print(teste.matches_salary_range({"max_salary": 10000, "min_salary": 0}, -1))
-
-# para funcionar minhas variaveis preciso corrigir o import
