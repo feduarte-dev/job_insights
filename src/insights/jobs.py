@@ -14,11 +14,8 @@ class ProcessJobs:
         return self.jobs_list
 
     def get_unique_job_types(self) -> List[str]:
-        job_types = []
-        for row in self.jobs_list:
-            if row["job_type"] not in job_types:
-                job_types.append(row["job_type"])
-        return job_types
+        unique_jobs = set(row["job_type"] for row in self.jobs_list)
+        return list(unique_jobs)
 
     def filter_by_multiple_criteria(self, jobs, filters) -> List[dict]:
         if not isinstance(filters, dict):
