@@ -1,17 +1,6 @@
 from typing import List, Dict
 import csv
 
-jobs = [
-    {"id": 1, "industry": "IT", "job_type": "FULL_TIME"},
-    {"id": 2, "industry": "Healthcare", "job_type": "PART_TIME"},
-    {"id": 3, "industry": "Finance", "job_type": "FULL_TIME"},
-    {"id": 4, "industry": "IT", "job_type": "CONTRACTOR"},
-    {"id": 5, "industry": "Healthcare", "job_type": "FULL_TIME"},
-    {"id": 6, "industry": "Finance", "job_type": "PART_TIME"},
-    {"id": 7, "industry": "IT", "job_type": "FULL_TIME"},
-    {"id": 8, "industry": "Healthcare", "job_type": "CONTRACTOR"},
-]
-
 
 class ProcessJobs:
     def __init__(self) -> None:
@@ -31,9 +20,7 @@ class ProcessJobs:
                 job_types.append(row["job_type"])
         return job_types
 
-    def filter_by_multiple_criteria(
-        self, jobs: list[dict], filters: dict
-    ) -> List[dict]:
+    def filter_by_multiple_criteria(self, jobs, filters) -> List[dict]:
         if not isinstance(filters, dict):
             raise TypeError
 
