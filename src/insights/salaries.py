@@ -35,13 +35,20 @@ class ProcessSalaries(ProcessJobs):
                 raise ValueError
 
             return min_salary <= int(salary) <= max_salary
-        except (TypeError, KeyError):
+        except (TypeError, KeyError):  # isso é gambiarra?
             raise ValueError
 
     def filter_by_salary_range(
         self, jobs: List[dict], salary: Union[str, int]
     ) -> List[Dict]:
-        pass
+        filtered_list = []
+        for row in jobs:
+            try:
+                if self.matches_salary_range(row, int(salary)):
+                    filtered_list.append(row)
+            finally:
+                continue
+        return filtered_list
 
 
 # teste = ProcessSalaries()
